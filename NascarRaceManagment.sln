@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NascarRaceManagment", "NascarRaceManagment\NascarRaceManagment.csproj", "{C12DCE1B-9BE0-427F-8F76-6C420A6F7F1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C12DCE1B-9BE0-427F-8F76-6C420A6F7F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C12DCE1B-9BE0-427F-8F76-6C420A6F7F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C12DCE1B-9BE0-427F-8F76-6C420A6F7F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C12DCE1B-9BE0-427F-8F76-6C420A6F7F1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CFECC93E-95DD-4989-B19D-F627B22DAF3C}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8bc29b5ea3c446839f89ed0e39e183ed" Name="Diagram1">
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.Brand" Width="1.5" PointX="1.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.Car" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.Participant" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.Race" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.RaceParticipant" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.RaceUser" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.Role" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.Track" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NASCARRaceManagementDBModel.User" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="NASCARRaceManagementDBModel.FK_Car_Brand" ManuallyRouted="false" />
+        <AssociationConnector Association="NASCARRaceManagementDBModel.FK_Participant_Car" ManuallyRouted="false" />
+        <AssociationConnector Association="NASCARRaceManagementDBModel.FK_RaceParticipant_Participant" ManuallyRouted="false" />
+        <AssociationConnector Association="NASCARRaceManagementDBModel.FK_Race_Track" ManuallyRouted="false" />
+        <AssociationConnector Association="NASCARRaceManagementDBModel.FK_RaceParticipant_Race" ManuallyRouted="false" />
+        <AssociationConnector Association="NASCARRaceManagementDBModel.FK_RaceUser_Race" ManuallyRouted="false" />
+        <AssociationConnector Association="NASCARRaceManagementDBModel.FK_RaceUser_User" ManuallyRouted="false" />
+        <AssociationConnector Association="NASCARRaceManagementDBModel.FK_User_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

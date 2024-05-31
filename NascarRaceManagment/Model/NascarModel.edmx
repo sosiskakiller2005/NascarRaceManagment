@@ -1,0 +1,587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище NASCARRaceManagementDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarBrandId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="CarId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrackId" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RaceParticipant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaceId" Type="int" Nullable="false" />
+          <Property Name="ParticipantId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RaceUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaceId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Track">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Length" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="bigint" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Login" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="18" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Car_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="CarBrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participant_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="CarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Race_Track">
+          <End Role="Track" Type="Self.Track" Multiplicity="1" />
+          <End Role="Race" Type="Self.Race" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Track">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Race">
+              <PropertyRef Name="TrackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceParticipant_Participant">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="RaceParticipant" Type="Self.RaceParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceParticipant">
+              <PropertyRef Name="ParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceParticipant_Race">
+          <End Role="Race" Type="Self.Race" Multiplicity="1" />
+          <End Role="RaceParticipant" Type="Self.RaceParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceParticipant">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceUser_Race">
+          <End Role="Race" Type="Self.Race" Multiplicity="1" />
+          <End Role="RaceUser" Type="Self.RaceUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceUser">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="RaceUser" Type="Self.RaceUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceUser">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище NASCARRaceManagementDBModelContainer">
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaceParticipant" EntityType="Self.RaceParticipant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaceUser" EntityType="Self.RaceUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Track" EntityType="Self.Track" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Car_Brand" Association="Self.FK_Car_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participant_Car" Association="Self.FK_Participant_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Participant" EntitySet="Participant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Race_Track" Association="Self.FK_Race_Track">
+            <End Role="Track" EntitySet="Track" />
+            <End Role="Race" EntitySet="Race" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceParticipant_Participant" Association="Self.FK_RaceParticipant_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="RaceParticipant" EntitySet="RaceParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceParticipant_Race" Association="Self.FK_RaceParticipant_Race">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="RaceParticipant" EntitySet="RaceParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceUser_Race" Association="Self.FK_RaceUser_Race">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="RaceUser" EntitySet="RaceUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceUser_User" Association="Self.FK_RaceUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="RaceUser" EntitySet="RaceUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NASCARRaceManagementDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Brand" FromRole="Brand" ToRole="Car" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CarBrandId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_Car_Brand" FromRole="Car" ToRole="Brand" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK_Participant_Car" FromRole="Car" ToRole="Participant" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="CarId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Participant_Car" FromRole="Participant" ToRole="Car" />
+          <NavigationProperty Name="RaceParticipant" Relationship="Self.FK_RaceParticipant_Participant" FromRole="Participant" ToRole="RaceParticipant" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrackId" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Track" Relationship="Self.FK_Race_Track" FromRole="Race" ToRole="Track" />
+          <NavigationProperty Name="RaceParticipant" Relationship="Self.FK_RaceParticipant_Race" FromRole="Race" ToRole="RaceParticipant" />
+          <NavigationProperty Name="RaceUser" Relationship="Self.FK_RaceUser_Race" FromRole="Race" ToRole="RaceUser" />
+        </EntityType>
+        <EntityType Name="RaceParticipant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceId" Type="Int32" Nullable="false" />
+          <Property Name="ParticipantId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK_RaceParticipant_Participant" FromRole="RaceParticipant" ToRole="Participant" />
+          <NavigationProperty Name="Race" Relationship="Self.FK_RaceParticipant_Race" FromRole="RaceParticipant" ToRole="Race" />
+        </EntityType>
+        <EntityType Name="RaceUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Race" Relationship="Self.FK_RaceUser_Race" FromRole="RaceUser" ToRole="Race" />
+          <NavigationProperty Name="User" Relationship="Self.FK_RaceUser_User" FromRole="RaceUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Track">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Length" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Race" Relationship="Self.FK_Race_Track" FromRole="Track" ToRole="Race" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="Int64" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RaceUser" Relationship="Self.FK_RaceUser_User" FromRole="User" ToRole="RaceUser" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Car_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="CarBrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participant_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="CarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceParticipant_Participant">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="RaceParticipant" Type="Self.RaceParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceParticipant">
+              <PropertyRef Name="ParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Race_Track">
+          <End Role="Track" Type="Self.Track" Multiplicity="1" />
+          <End Role="Race" Type="Self.Race" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Track">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Race">
+              <PropertyRef Name="TrackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceParticipant_Race">
+          <End Role="Race" Type="Self.Race" Multiplicity="1" />
+          <End Role="RaceParticipant" Type="Self.RaceParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceParticipant">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceUser_Race">
+          <End Role="Race" Type="Self.Race" Multiplicity="1" />
+          <End Role="RaceUser" Type="Self.RaceUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceUser">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="RaceUser" Type="Self.RaceUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceUser">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NASCARRaceManagementDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brand" EntityType="Self.Brand" />
+          <EntitySet Name="Car" EntityType="Self.Car" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" />
+          <EntitySet Name="Race" EntityType="Self.Race" />
+          <EntitySet Name="RaceParticipant" EntityType="Self.RaceParticipant" />
+          <EntitySet Name="RaceUser" EntityType="Self.RaceUser" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Track" EntityType="Self.Track" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Car_Brand" Association="Self.FK_Car_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participant_Car" Association="Self.FK_Participant_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Participant" EntitySet="Participant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceParticipant_Participant" Association="Self.FK_RaceParticipant_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="RaceParticipant" EntitySet="RaceParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Race_Track" Association="Self.FK_Race_Track">
+            <End Role="Track" EntitySet="Track" />
+            <End Role="Race" EntitySet="Race" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceParticipant_Race" Association="Self.FK_RaceParticipant_Race">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="RaceParticipant" EntitySet="RaceParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceUser_Race" Association="Self.FK_RaceUser_Race">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="RaceUser" EntitySet="RaceUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceUser_User" Association="Self.FK_RaceUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="RaceUser" EntitySet="RaceUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище NASCARRaceManagementDBModelContainer" CdmEntityContainer="NASCARRaceManagementDBEntities">
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Car">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.Car">
+              <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CarBrandId" ColumnName="CarBrandId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participant">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.Participant">
+              <MappingFragment StoreEntitySet="Participant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Race">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.Race">
+              <MappingFragment StoreEntitySet="Race">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TrackId" ColumnName="TrackId" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RaceParticipant">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.RaceParticipant">
+              <MappingFragment StoreEntitySet="RaceParticipant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+                <ScalarProperty Name="ParticipantId" ColumnName="ParticipantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RaceUser">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.RaceUser">
+              <MappingFragment StoreEntitySet="RaceUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Track">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.Track">
+              <MappingFragment StoreEntitySet="Track">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="NASCARRaceManagementDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

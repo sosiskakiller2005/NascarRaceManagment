@@ -1,0 +1,95 @@
+﻿<Window x:Class="NascarRaceManagment.Views.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NascarRaceManagment.Views.Windows"
+        mc:Ignorable="d"
+            WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="700" Width="1100">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <Image Source="/Resources/logo.png" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+        <TextBlock Text="РАСПИСАНИЕ СЕРИИ КУБКОВ NASCAR" FontWeight="SemiBold" HorizontalAlignment="Center" Grid.Row="1" Margin="20,0,0,0"/>
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+
+                <Button Name="AllRacesBtn" Content="Все гонки" Click="AllRacesBtn_Click" Grid.Column="1" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="JanauryBtn" Content="Январь" Click="JanauryBtn_Click" Grid.Column="3" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="FebruaryBtn" Content="Февраль" Click="FebruaryBtn_Click" Grid.Column="5" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="MarchBtn" Content="Март" Click="MarchBtn_Click" Grid.Column="7" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="AprilBtn" Content="Апрель" Click="AprilBtn_Click" Grid.Column="9" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="MayBtn" Content="Май" Click="MayBtn_Click" Grid.Column="11" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="JuneBtn" Content="Июнь" Click="JuneBtn_Click" Grid.Column="13" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="JulyBtn" Content="Июль" Click="JulyBtn_Click" Grid.Column="15" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="AugustBtn" Content="Август" Click="AugustBtn_Click" Grid.Column="17" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="SeptemberBtn" Content="Сентябрь" Click="SeptemberBtn_Click" Grid.Column="19" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="OctoberBtn" Content="Октябрь" Click="OctoberBtn_Click" Grid.Column="21" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="NovemberBtn" Content="Ноябрь" Click="NovemberBtn_Click" Grid.Column="23" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+                <Button Name="DecemberBtn" Content="Декабрь" Click="DecemberBtn_Click" Grid.Column="25" Background="Black" BorderBrush="{x:Null}" Width="200"/>
+            </Grid>
+        </ScrollViewer>
+        <ListView Name="RacesLV" Grid.Row="3" SelectionChanged="RacesLV_SelectionChanged" Margin="50,0" Foreground="Black" Width="900" Background="Black" BorderBrush="{x:Null}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Height="150" Width="861" Background="#FF989898">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding DateTime, StringFormat={}{0:dd.MM.yyy HH:mm}}" Foreground="Black" TextWrapping="Wrap"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="{Binding Track.Name}" Foreground="Black"/>
+                                        <TextBlock Text="{Binding Track.Location}" Foreground="Black"/>
+                                        
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
